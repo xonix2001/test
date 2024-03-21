@@ -19,16 +19,57 @@ def remove_spaces_and_newlines(text):
     else:
         return 'None'
 
-
+def seletor(list_,keywords,list1,list2):        
+    for n,i in enumerate(list_):
+        i=remove_spaces_and_newlines(i)
+        e=i.split('$')
+        a=[]
+        num=0
+        
+        for b in e:
+            if b and any(key in b for key in keywords):
+                num+=1
+                a.append(b)
+      
+        list1.append(a)
+        list2.append(len(a))
+        
+        
+        
+def check(n):
+    for l,i in enumerate(list_total):
+        if i[n] and isinstance(i[n], str):
+            return i[n],8-l
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 if __name__ =="__main__":
     file_path=r"D:\python code\sort_docx\files\分类结果.xlsx"
     sheet_name='Sheet1'
     excel=of.excel_extract(file_path,sheet_name)
     excel1=of.excel_writer(file_path,sheet_name)
-    list1=excel.col_byindex(1,None)[1]
+    
     list2=excel.col_byindex(9,None)[1]
-    list_cc=excel.col_byindex(2,None)[1]
     list_exam=excel.col_byindex(8,None)[1]
+    list_pexam=excel.col_byindex(7,None)[1]
+    list_f_history=excel.col_byindex(6,None)[1]
+    list_p_history=excel.col_byindex(5,None)[1]
+    list_o_history=excel.col_byindex(4,None)[1]
+    list_n_history=excel.col_byindex(3,None)[1]
+    list_cc=excel.col_byindex(2,None)[1]
+    list1=excel.col_byindex(1,None)[1]
+    list_total=[list_exam,list_pexam,list_f_history,list_p_history,list_o_history,list_n_history,list_cc,list1]
+
+    check(5)
 
     list3=[]
     list4=[]
@@ -52,6 +93,15 @@ if __name__ =="__main__":
     list22=[]
     list23=[]
     list24=[]
+    list25=[]
+    list26=[]
+    list27=[]
+    list28=[]
+    list29=[]
+    list30=[]
+    list31=[]
+    list32=[]
+    list33=[]
 
 
 
@@ -59,7 +109,7 @@ if __name__ =="__main__":
 
 
 
-
+    #性别 姓名 年龄 病历号 影像号 脑电图号 检查号 电话号 主诉 
     for n,i in enumerate(list1):
         i=remove_spaces_and_newlines(i)
         # gender =extractor(r'男|女',i)
@@ -70,7 +120,7 @@ if __name__ =="__main__":
         # video_num=extractor(r"(?:脑电图号|脑电号)[：:]?(\d+[-\d]*)",i)
         # check_num=extractor(r"检查号[：:]?(\d+)",i)
         # phone_num=extractor(r"(?:电话号|电话)[：:]\D*(\d+)",i)
-        chief=ec(i)
+        #chief=ec(i)
         
         
         #添加
@@ -90,40 +140,63 @@ if __name__ =="__main__":
         # list17.append(len(check_num))
         # list18.append(phone_num)
         # list19.append(len(phone_num))   
-        if chief:
-            list20.append(chief)
-            list21.append(len(chief))
-        else:
-            cc=remove_spaces_and_newlines(list_cc[n])
-            cc=extract_all_complaints(cc)
-            list20.append(cc)
-            list21.append(len(cc))
+        # if chief:
+        #     list20.append(chief)
+        #     list21.append(len(chief))
+        # else:
+        #     cc=remove_spaces_and_newlines(list_cc[n])
+        #     cc=extract_all_complaints(cc)
+        #     list20.append(cc)
+        #     list21.append(len(cc))
             
         # list22.append(phone_num)
         # list23.append(len(phone_num))   
        
     #print(list20)    
-        
-    for i in list2:
-        i=remove_spaces_and_newlines(i)
-        name=ep(i)
-        list3.append(name)
+    
+    #姓名    
+    # for i in list2:
+    #     i=remove_spaces_and_newlines(i)
+    #     name=ep(i)
+    #     list3.append(name)
+    
+    #辅助检查
+    # for n,i in enumerate(list_exam):
 
-    for n,i in enumerate(list_exam):
-        i=remove_spaces_and_newlines(i)
-        e=i.split('$')
-        a=[]
-        num=0
-        for b in e:
-            if b and b!='辅助检查：':
-                num+=1
-            exam_data=extract_exam_data_refined(b)
-            if exam_data:
-                for i in exam_data:
-                    a.append(i)
-        list22.append(a)
-        list23.append(num-len(a))
+    #     i=check(n)[0]
+    #     location=check(n)[1] if check(n)[1] else ''
+    #     i=remove_spaces_and_newlines(i)
+    #     e=i.split('$')
+    #     a=[]
+    #     num=0
+    #     for b in e:
+    #         if b and b!='辅助检查：':
+    #             num+=1
+    #         exam_data=extract_exam_data_refined(b)
+    #         if exam_data:
+    #             for i in exam_data:
+    #                 a.append(i)
+    #     list22.append(a)
+    #     list23.append(num-len(a))
+    #     list24.append(location)
+        #print(a,num-len(a),location)
         
+        
+    #查体
+    # seletor(list_pexam,['查体','体格检查','左右利手','BP','血压','神清','体征','无特殊'],list25,list26)
+    # #家族史
+    # seletor(list_f_history,['家族史','其母','病史','无特殊'],list27,list28)
+    # #个人史
+    # seletor(list_p_history,['个人史','生长发育','围产期','早产','无特殊'],list29,list30)
+    # #既往史
+    # seletor(list_o_history,['既往','足月','病史','高热','SEEG植入','结节','患者','高血压','糖尿病','外伤','手术','惊厥','切除','脑膜炎','无特殊'],list31,list32)
+    
+    
+    
+    #现病史    
+    
+    
+    
     #写入
 
     # excel1.write_list_to_column(11,list2)
@@ -152,6 +225,16 @@ if __name__ =="__main__":
     # excel1.write_list_to_column(27,list19)
     #excel1.write_list_to_column(28,list20)
     #excel1.write_list_to_column(29,list21)
-    excel1.write_list_to_column(30,list22)
-    excel1.write_list_to_column(31,list23)
-    #excel1.write_list_to_column(32,list24)
+    # excel1.write_list_to_column(30,list22)
+    # excel1.write_list_to_column(31,list23)
+    # excel1.write_list_to_column(32,list24)
+    # excel1.write_list_to_column(33,list25)
+    # excel1.write_list_to_column(34,list26)
+    # excel1.write_list_to_column(35,list27)
+    
+    # excel1.write_list_to_column(36,list28)
+    # excel1.write_list_to_column(37,list29)
+    
+    # excel1.write_list_to_column(38,list30)
+    # excel1.write_list_to_column(39,list31)
+    # excel1.write_list_to_column(40,list32)
