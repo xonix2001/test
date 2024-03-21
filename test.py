@@ -19,8 +19,12 @@ def remove_spaces_and_newlines(text):
     else:
         return 'None'
 
-def seletor(list_,keywords,list1,list2):        
+def seletor(list_,col,keywords,list1,list2,list3):        
     for n,i in enumerate(list_):
+        checked=check(n,col) 
+        i=checked[0] if checked else None
+        location=checked[1] if checked else ''
+
         i=remove_spaces_and_newlines(i)
         e=i.split('$')
         a=[]
@@ -33,13 +37,14 @@ def seletor(list_,keywords,list1,list2):
       
         list1.append(a)
         list2.append(len(a))
+        list3.append(location)
         
         
         
-def check(n):
-    for l,i in enumerate(list_total):
+def check(n,col):
+    for l,i in enumerate(list_total[8-col:]):
         if i[n] and isinstance(i[n], str):
-            return i[n],8-l
+            return i[n],col-l
         
     
     
@@ -69,7 +74,7 @@ if __name__ =="__main__":
     list1=excel.col_byindex(1,None)[1]
     list_total=[list_exam,list_pexam,list_f_history,list_p_history,list_o_history,list_n_history,list_cc,list1]
 
-    check(5)
+
 
     list3=[]
     list4=[]
@@ -102,6 +107,9 @@ if __name__ =="__main__":
     list31=[]
     list32=[]
     list33=[]
+    list34=[]
+    list35=[]
+    list36=[]
 
 
 
@@ -110,8 +118,8 @@ if __name__ =="__main__":
 
 
     #性别 姓名 年龄 病历号 影像号 脑电图号 检查号 电话号 主诉 
-    for n,i in enumerate(list1):
-        i=remove_spaces_and_newlines(i)
+    # for n,i in enumerate(list1):
+    #     i=remove_spaces_and_newlines(i)
         # gender =extractor(r'男|女',i)
         # name=en(i)
         # age=ea(i)
@@ -162,9 +170,9 @@ if __name__ =="__main__":
     
     #辅助检查
     # for n,i in enumerate(list_exam):
-
-    #     i=check(n)[0]
-    #     location=check(n)[1] if check(n)[1] else ''
+    #     checked=check(n,8) 
+    #     i=checked[0] if checked else None
+    #     location=checked[1] if checked else ''
     #     i=remove_spaces_and_newlines(i)
     #     e=i.split('$')
     #     a=[]
@@ -183,13 +191,13 @@ if __name__ =="__main__":
         
         
     #查体
-    # seletor(list_pexam,['查体','体格检查','左右利手','BP','血压','神清','体征','无特殊'],list25,list26)
-    # #家族史
-    # seletor(list_f_history,['家族史','其母','病史','无特殊'],list27,list28)
+    seletor(list_pexam,7,['查体','体格检查','左右利手','BP','血压','神清','体征','无特殊'],list25,list26,list27)
+    #家族史
+    # seletor(list_f_history,6,['家族史','其母','病史','无特殊'],list28,list29,list30)
     # #个人史
-    # seletor(list_p_history,['个人史','生长发育','围产期','早产','无特殊'],list29,list30)
+    # seletor(list_p_history,5,['个人史','生长发育','围产期','早产','无特殊'],list31,list32,list33)
     # #既往史
-    # seletor(list_o_history,['既往','足月','病史','高热','SEEG植入','结节','患者','高血压','糖尿病','外伤','手术','惊厥','切除','脑膜炎','无特殊'],list31,list32)
+    # seletor(list_o_history,4,['既往','足月','病史','高热','SEEG植入','结节','患者','高血压','糖尿病','外伤','手术','惊厥','切除','脑膜炎','无特殊'],list34,list35,list36)
     
     
     
@@ -228,9 +236,9 @@ if __name__ =="__main__":
     # excel1.write_list_to_column(30,list22)
     # excel1.write_list_to_column(31,list23)
     # excel1.write_list_to_column(32,list24)
-    # excel1.write_list_to_column(33,list25)
-    # excel1.write_list_to_column(34,list26)
-    # excel1.write_list_to_column(35,list27)
+    excel1.write_list_to_column(33,list25)
+    excel1.write_list_to_column(34,list26)
+    excel1.write_list_to_column(35,list27)
     
     # excel1.write_list_to_column(36,list28)
     # excel1.write_list_to_column(37,list29)
@@ -238,3 +246,9 @@ if __name__ =="__main__":
     # excel1.write_list_to_column(38,list30)
     # excel1.write_list_to_column(39,list31)
     # excel1.write_list_to_column(40,list32)
+    # excel1.write_list_to_column(41,list33)
+    # excel1.write_list_to_column(42,list34)
+    # excel1.write_list_to_column(43,list35)
+    # excel1.write_list_to_column(44,list36)
+    # excel1.write_list_to_column(45,list37)
+    # excel1.write_list_to_column(46,list38)
