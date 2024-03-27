@@ -1,3 +1,5 @@
+import re
+
 import Office操作脚本 as of
 from extract_name import extract_names_with_new_rule as en
 from extract_name import extract_first_chinese_phrase as ep
@@ -9,7 +11,7 @@ from extract_name import extract_exam_data
 from extract_name import extract_exam_data_refined
 
 
-import re
+
 
 def remove_spaces_and_newlines(text):
     # 使用正则表达式去除空格和换行符
@@ -68,7 +70,7 @@ def count(list_exam):
     
     
 if __name__ =="__main__":
-    file_path=r"C:\Users\11\Desktop\sort_docx\main\files\分类结果.xlsx"
+    file_path=r"C:\Users\11\Desktop\database\main\files\分类结果.xlsx"
     sheet_name='Sheet1'
     excel=of.excel_extract(file_path,sheet_name)
     excel1=of.excel_writer(file_path,sheet_name)
@@ -239,7 +241,7 @@ if __name__ =="__main__":
     
     
     #写入
-
+    #for n,i in range(1,37):
     # excel1.write_list_to_column(11,list2)
     # excel1.write_list_to_column(11,list3)
     # excel1.write_list_to_column(12,list6)
