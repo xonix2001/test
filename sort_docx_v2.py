@@ -67,6 +67,6 @@ def process_folder(folder_path, output_excel_path):
 
 
 if __name__ == '__main__':
-    folder_path = r'E:\病例整理\先兆\病历摘要\病历摘要（未融合）'#'C:\Users\11\Desktop\先兆\先兆拷贝资料\1'#'E:\病例整理\先兆\病历摘要\病历摘要（未融合）'
+    folder_path = r'E:\病例整理\先兆\病历摘要\病历摘要（未融合）'
     output_excel_path = r'D:\python code\sort_docx\files\分类结果v2.xlsx'
     process_folder(folder_path, output_excel_path)

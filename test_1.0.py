@@ -1,5 +1,7 @@
 import re
+
 import Office操作脚本 as of
+import sort_docx_v2 as sd
 from extract_name import (
     extract_names_with_new_rule as en, 
     extract_first_chinese_phrase as ep, 
@@ -106,7 +108,14 @@ def from_pexam():
            
 
 if __name__ == "__main__":
+    #path
+    folder_path = r'E:\病例整理\先兆\病历摘要\病历摘要（未融合）'
     file_path = r"C:\Users\11\Desktop\database\main\files\分类结果.xlsx"
+    
+    #convert to excel
+    sd.process_folder(folder_path, file_path)
+    
+    #excel_script Variable setting
     sheet_name = 'Sheet1'
     excel = of.excel_extract(file_path, sheet_name)
     excel1 = of.excel_writer(file_path, sheet_name)
