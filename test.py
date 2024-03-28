@@ -1,3 +1,5 @@
+import re
+
 import Office操作脚本 as of
 from extract_name import extract_names_with_new_rule as en
 from extract_name import extract_first_chinese_phrase as ep
@@ -9,7 +11,7 @@ from extract_name import extract_exam_data
 from extract_name import extract_exam_data_refined
 
 
-import re
+
 
 def remove_spaces_and_newlines(text):
     # 使用正则表达式去除空格和换行符
@@ -26,14 +28,16 @@ def seletor(list_,col,keywords,list1,list2,list3):
         location=checked[1] if checked else ''
 
         i=remove_spaces_and_newlines(i)
-        e=i.split('$')
         a=[]
-        num=0
-        
-        for b in e:
-            if b and any(key in b for key in keywords):
-                num+=1
-                a.append(b)
+        if i !='None':
+            e=i.split('$')
+            
+            num=0
+            
+            for b in e:
+                if b and any(key in b for key in keywords):
+                    num+=1
+                    a.append(b)
       
         list1.append(a)
         list2.append(len(a))
@@ -46,9 +50,17 @@ def check(n,col):
         if i[n] and isinstance(i[n], str):
             return i[n],col-l
         
-    
-    
-    
+def count(list_exam):
+    a=[]
+    for n,i in enumerate(list_exam):
+        i=remove_spaces_and_newlines(i)
+        if not i =='None':
+            e=i.split('$')
+            num=len(e)
+        else:
+            num=''
+        a.append(num)
+    return a
     
     
     
@@ -58,7 +70,7 @@ def check(n,col):
     
     
 if __name__ =="__main__":
-    file_path=r"D:\python code\sort_docx\files\分类结果.xlsx"
+    file_path=r"C:\Users\11\Desktop\database\main\files\分类结果.xlsx"
     sheet_name='Sheet1'
     excel=of.excel_extract(file_path,sheet_name)
     excel1=of.excel_writer(file_path,sheet_name)
@@ -189,15 +201,38 @@ if __name__ =="__main__":
     #     list24.append(location)
         #print(a,num-len(a),location)
         
-        
+
     #查体
-    seletor(list_pexam,7,['查体','体格检查','左右利手','BP','血压','神清','体征','无特殊'],list25,list26,list27)
+    for n,i in enumerate(list_pexam):
+        checked=check(n,7) 
+        i=checked[0] if checked else None
+        location=checked[1] if checked else ''
+        i=remove_spaces_and_newlines(i)
+        e=i.split('$')
+        a=[]
+        num=0
+        for b in e:
+            if b and all(key not in b for key in ['MRI','EEG','PET','MEG','脑电图','脑磁图','血药浓度','视野检查','CT','ECG','MRS']):
+                num+=1
+            pexam_data=extract_exam_data_refined(b)
+            if pexam_data:
+                for i in pexam_data:
+                    a.append(i)
+        list22.append(a)
+        list23.append(num-len(a))
+        list24.append(location)
+        print(a,num-len(a),location)
+
+
+    
+    #查体
+    #seletor(list_pexam,7,['查体','体格检查','左右利手','BP','血压','神清','体征','无特殊'],list25,list26,list27)
     #家族史
-    # seletor(list_f_history,6,['家族史','其母','病史','无特殊'],list28,list29,list30)
-    # #个人史
-    # seletor(list_p_history,5,['个人史','生长发育','围产期','早产','无特殊'],list31,list32,list33)
-    # #既往史
-    # seletor(list_o_history,4,['既往','足月','病史','高热','SEEG植入','结节','患者','高血压','糖尿病','外伤','手术','惊厥','切除','脑膜炎','无特殊'],list34,list35,list36)
+    #seletor(list_f_history,6,['家族史','其母','病史','无特殊'],list28,list29,list30)
+    #个人史
+    #seletor(list_p_history,5,['个人史','生长发育','围产期','早产','无特殊'],list31,list32,list33)
+    #既往史
+    #seletor(list_o_history,4,['既往','足月','病史','高热','SEEG植入','结节','患者','高血压','糖尿病','外伤','手术','惊厥','切除','脑膜炎','无特殊'],list34,list35,list36)
     
     
     
@@ -206,7 +241,7 @@ if __name__ =="__main__":
     
     
     #写入
-
+    #for n,i in range(1,37):
     # excel1.write_list_to_column(11,list2)
     # excel1.write_list_to_column(11,list3)
     # excel1.write_list_to_column(12,list6)
@@ -236,9 +271,9 @@ if __name__ =="__main__":
     # excel1.write_list_to_column(30,list22)
     # excel1.write_list_to_column(31,list23)
     # excel1.write_list_to_column(32,list24)
-    excel1.write_list_to_column(33,list25)
-    excel1.write_list_to_column(34,list26)
-    excel1.write_list_to_column(35,list27)
+    # excel1.write_list_to_column(33,list25)
+    # excel1.write_list_to_column(34,list26)
+    # excel1.write_list_to_column(35,list27)
     
     # excel1.write_list_to_column(36,list28)
     # excel1.write_list_to_column(37,list29)

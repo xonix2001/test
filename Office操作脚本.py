@@ -94,7 +94,7 @@ class excel_writer(object):
         sheet = workbook[sheet_name]
         
         for col, value in enumerate(data_list, start=1):
-            sheet.cell(row=row_number, column=col, value=value)
+            sheet.cell(row=row_number, column=col, value=str(value))
         
         workbook.save(excel_path)
         workbook.close()
