@@ -1,3 +1,2 @@
 __pycache__/
-files/word_to_excel/*
-!files/word_to_excel/1.py
+files/*
